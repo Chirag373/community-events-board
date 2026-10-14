@@ -3,8 +3,9 @@ import "./globals.css";
 import Providers from "@/components/providers";
 import Header from "@/components/header";
 export const metadata: Metadata = {
-  title: "Community — UI preview",
-  description: "Community Events Board interface preview.",
+  title: "Community — A little closer to local",
+  description:
+    "Discover music, workshops, food and more in your neighbourhood.",
 };
 export default function RootLayout({
   children,
@@ -18,14 +19,20 @@ export default function RootLayout({
           <Header />
           {children}
           <footer>
-            <div className="footer-inner">
-              <span>
-                <strong>community</strong> · Good things happen nearby.
-              </span>
-            </div>
+            <LinkFooter />
           </footer>
         </Providers>
       </body>
     </html>
+  );
+}
+function LinkFooter() {
+  return (
+    <div className="footer-inner">
+      <span>
+        <strong>community</strong> · Good things happen nearby.
+      </span>
+      <a href="/admin">Admin access ↗</a>
+    </div>
   );
 }

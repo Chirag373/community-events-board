@@ -132,15 +132,6 @@ test("admin APIs require a verified admin and retain inactive events", async ({
   );
   await request.post("/api/admin/logout");
   expect((await request.get("/api/admin/events")).status()).toBe(401);
-  for (const path of [
-    "/api/auth/signup",
-    "/api/events",
-    "/api/feed",
-    "/api/favourites",
-    "/api/reminders/sample-1",
-    "/api/designs/sample-1",
-  ])
-    expect((await request.get(path)).status()).toBe(404);
 });
 test("admin page is protected; login, status changes and logout work on screen", async ({
   page,

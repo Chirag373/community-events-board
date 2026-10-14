@@ -1,4 +1,4 @@
 import EventList from "@/components/event-list";
-export default function FeedPage() {
+export default function Feed() {
   return <EventList feed />;
 }

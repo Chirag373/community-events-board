@@ -3,12 +3,13 @@ import Link from "next/link";
 import { Chip } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import type { EventPreview } from "./preview-data";
+import type { Event } from "@/lib/shared";
+import { price, date } from "@/lib/shared";
 import Reminder from "./reminder";
-export default function EventCard({ event }: { event: EventPreview }) {
+export default function EventCard({ event }: { event: Event }) {
   return (
     <article className="event-card">
-      <Link className="card-photo" href="/events/sample-1">
+      <Link className="card-photo" href={`/events/${event.id}`}>
         <div className="photo-fallback" />
         <img
           src={event.imageUrl}
@@ -28,8 +29,8 @@ export default function EventCard({ event }: { event: EventPreview }) {
         </span>
       </Link>
       <div className="card-body">
-        <p className="event-date">{event.date}</p>
-        <Link href="/events/sample-1" className="card-title">
+        <p className="event-date">{date(event.startsAt)}</p>
+        <Link href={`/events/${event.id}`} className="card-title">
           {event.title}
         </Link>
         <p className="event-city">
@@ -37,8 +38,12 @@ export default function EventCard({ event }: { event: EventPreview }) {
           {event.city}
         </p>
         <div className="card-bottom">
-          <strong>{event.price}</strong>
-          <Reminder />
+          <strong>{price(event.price)}</strong>
+          <Reminder
+            key={`${event.id}-${event.reminded}`}
+            id={event.id}
+            initial={event.reminded}
+          />
         </div>
       </div>
     </article>

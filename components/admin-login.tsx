@@ -2,9 +2,11 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Alert, Button, TextField } from "@mui/material";
+import { useAuth } from "./providers";
 import { api } from "@/lib/api";
 export default function AdminLogin() {
   const router = useRouter();
+  const { refresh } = useAuth();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   async function login(event: React.FormEvent<HTMLFormElement>) {
@@ -17,6 +19,7 @@ export default function AdminLogin() {
         email: form.get("email"),
         password: form.get("password"),
       });
+      await refresh();
       router.replace("/admin");
     } catch (error) {
       setError((error as Error).message);

@@ -10,6 +10,9 @@ model User {
   email String @unique
   passwordHash String
   role String @default("USER")
+  favourites Favourite[]
+  reminders Reminder[]
+  designs CardDesign[]
 }
 model Event {
   id String @id @default(cuid())
@@ -21,6 +24,30 @@ model Event {
   description String
   imageUrl String
   active Boolean @default(true)
+  reminders Reminder[]
+  designs CardDesign[]
   @@index([active, startsAt])
   @@index([active, category, city, startsAt])
+}
+model Favourite {
+  userId String
+  category String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@id([userId, category])
+}
+model Reminder {
+  userId String
+  eventId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  @@id([userId, eventId])
+}
+model CardDesign {
+  userId String
+  eventId String
+  theme String @default("sage")
+  stickers Json
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  @@id([userId, eventId])
 }

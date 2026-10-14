@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { categories } from "./shared";
+import { categories, stickers } from "./shared";
 export const credentials = z.object({
   email: z
     .email()
@@ -26,4 +26,10 @@ export const eventInput = z.object({
     .max(2000)
     .refine((v) => /^https?:\/\//.test(v), "Use an http or https image URL."),
   active: z.boolean().default(true),
+});
+export const designInput = z.object({
+  theme: z.enum(["sage", "peach", "lavender"]),
+  stickers: z
+    .array(z.string().refine((v) => stickers.includes(v), "Unknown sticker."))
+    .max(3),
 });

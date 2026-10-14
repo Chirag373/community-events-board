@@ -40,10 +40,14 @@ export async function getCurrentUser(request?: Request) {
     return null;
   }
 }
-// Only admins may use the event-management APIs.
-export async function requireAdmin(request: Request) {
+export async function requireUser(request?: Request) {
   const user = await getCurrentUser(request);
   if (!user) throw new ApiError(401, "Please log in to continue.");
+  return user;
+}
+// Admin APIs always check the role on the server.
+export async function requireAdmin(request: Request) {
+  const user = await requireUser(request);
   if (user.role !== "ADMIN") throw new ApiError(403, "Admin access required.");
   return user;
 }

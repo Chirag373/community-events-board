@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
-// Static introduction for the visitor UI preview.
+// Static page introduction; event fetching lives in EventList.
 export default function EventHero({ feed }: { feed: boolean }) {
   return (
     <section className={`hero ${feed ? "feed-hero" : ""}`}>

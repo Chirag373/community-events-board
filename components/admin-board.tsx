@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -12,7 +11,6 @@ import {
 import { api } from "@/lib/api";
 import { categories, date, type Event } from "@/lib/shared";
 export default function AdminBoard() {
-  const router = useRouter();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -79,23 +77,12 @@ export default function AdminBoard() {
       setToggling("");
     }
   }
-  async function logout() {
-    try {
-      await api("/admin/logout", "POST");
-      router.replace("/admin/login");
-    } catch (error) {
-      setError((error as Error).message);
-    }
-  }
-
   return (
     <main className="container admin-page">
       <p className="eyebrow">THE COMMUNITY DESK</p>
       <h1>Make something happen.</h1>
       <p>Add a local event, or manage what’s visible to your neighbours.</p>
-      <Button type="button" variant="outlined" onClick={logout}>
-        Log out
-      </Button>
+
       {error && (
         <Alert
           severity="error"
