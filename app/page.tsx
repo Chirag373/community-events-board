@@ -1,4 +1,4 @@
-import AdminBoard from "@/components/admin-board";
+import EventList from "@/components/event-list";
 export default function HomePage() {
-  return <AdminBoard />;
+  return <EventList />;
 }

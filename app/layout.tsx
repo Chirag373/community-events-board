@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/components/providers";
-import AdminHeader from "@/components/admin-header";
+import Header from "@/components/header";
 export const metadata: Metadata = {
-  title: "Community — Admin UI",
-  description: "Community Events Board admin interface preview.",
+  title: "Community — UI preview",
+  description: "Community Events Board interface preview.",
 };
 export default function RootLayout({
   children,
@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <Providers>
-          <AdminHeader />
+          <Header />
           {children}
           <footer>
             <div className="footer-inner">

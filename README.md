@@ -1,25 +1,34 @@
-# Community Events Board — Admin UI
+# Community Events Board — UI Preview
 
-First stage: responsive admin interface built with Next.js App Router and Material UI.
+Next.js App Router and Material UI. This stage adds the visitor screens to the existing admin UI.
 
 ## Run
 
-Requires Node.js 22.12+ or 24.
+Requires Node.js 22.12+ or Node 24.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000/admin (the home page also shows the admin preview).
+Open http://localhost:3000.
 
-## Included
+## Screens
 
-- Admin header and matching green/neutral theme.
-- Event form with title, category, city, date/time, price, description and image URL.
-- Event list with three static preview rows and active/inactive switch visuals.
-- Phone and laptop layouts.
+- `/`: event cards, search/city/category controls and pagination visuals.
+- `/feed`: fixed sample of the personalised feed layout.
+- `/login` and `/signup`: email/password form designs.
+- `/favourites`: favourite-category selection design.
+- `/events/sample-1`: event detail, reminder button and card designer preview.
+- `/admin`: previously added admin form and static event list.
 
-This is a UI preview. The add button and status switches do not save or change events. Login, server protection, JSON APIs, database integration and visitor pages are deferred to later stages. No credentials are needed for this preview.
+The green/neutral theme and responsive phone/laptop layouts are shared throughout. Preview data is hard-coded in `components/preview-data.ts`. The card links open the same sample detail preview.
 
-Validation: `npm run lint` and `npm run build`.
+This commit contains display components only. Search, filtering, pagination, authentication, category selection, reminders, card editing and admin saves are not implemented yet. Buttons and chips are visual placeholders. There are no JSON APIs, database dependencies or saved state. The complete application logic will be added in later stages.
+
+## Checks
+
+```bash
+npm run lint
+npm run build
+```
