@@ -6,7 +6,7 @@ Built with Next.js App Router, Material UI, Prisma and SQLite.
 
 ## Setup
 
-Use Node.js 24 and npm.
+Use Node.js 24 and npm. Run these commands from the project folder, in order:
 
 ```bash
 npm install
@@ -16,7 +16,26 @@ npm run dev
 
 Open http://localhost:3000.
 
-The setup command creates the database, adds 15 sample events and creates the `.env` file. Running it again keeps the existing data.
+The setup command creates `.env` with the database URL and a random `JWT_SECRET`, generates the Prisma client, creates the database tables and adds 15 sample events and the admin account below. Running it again keeps the existing data.
+
+Run `npm run setup` before opening the app. You do not need to run `prisma generate` or `prisma db push` yourself. Those commands alone do not create the login secret or add the sample data.
+
+If you already have a `.env` file, setup keeps it as it is. Check that it contains:
+
+```env
+DATABASE_URL="file:./prisma/dev.db"
+JWT_SECRET="paste-your-generated-secret-here"
+```
+
+To generate a secret, run this command and copy its output into `JWT_SECRET`:
+
+```bash
+node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
+```
+
+The secret must have at least 32 characters. Keep `.env` private. Stop and restart `npm run dev` after changing it.
+
+If you already created the tables with `prisma db push`, add the `.env` values above and run `npm run db:seed` to add the sample data.
 
 ## Admin login
 
@@ -24,6 +43,8 @@ Log in at `/login`, then open `/admin`.
 
 - Email: `admin@community.local`
 - Password: `Admin@12345`
+
+Use `/signup` for your own visitor account. Do not sign up with the admin email before setup: signup creates a visitor, and seeding does not change an existing account's role. If you already did this, the account's database role needs to be changed from `USER` to `ADMIN`.
 
 The admin can add an event or change its status. Events are kept in the database when they are inactive.
 
